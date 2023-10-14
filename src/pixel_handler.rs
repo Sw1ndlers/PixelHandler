@@ -118,9 +118,11 @@ impl PixelHandler {
 
     pub fn update(&mut self, canvas: &mut Canvas, ctx: &mut Context) {
         let mut mesh_builder = graphics::MeshBuilder::new();
+        let mut new_pixels = HashMap::new();
 
-        for (_, pixel) in self.pixels.clone().iter_mut() {
+        for (_old_pos, pixel) in self.pixels.iter_mut() {
             pixel.append_to_mesh(&mut mesh_builder);
+            new_pixels.insert(pixel.position, pixel.clone());
         }
 
         let mesh = Mesh::from_data(ctx, mesh_builder.build());
@@ -129,6 +131,8 @@ impl PixelHandler {
         for (params, drawable) in &self.draw_stack {
             drawable.draw(canvas, *params);
         }
+
+        self.pixels = new_pixels;
 
         self.draw_stack.clear();
         self.frame_time = Instant::now();
