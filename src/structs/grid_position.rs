@@ -54,13 +54,14 @@ impl GridPosition {
         )
     }
 
+    // Broken
     pub fn is_offscreen(&self, ctx: &mut ggez::Context) -> bool {
         let window_size = ctx.gfx.size();
 
         self.x < 0
-            || self.x > window_size.0 as i32
-            || self.y < 0
-            || self.y > window_size.1 as i32
+            || self.y < 0 
+            || self.x > window_size.0 as i32 - (self.cell_size.0 as i32 * 2)  
+            || self.y > window_size.1 as i32 - (self.cell_size.1 as i32 * 3) 
     }
 }
 

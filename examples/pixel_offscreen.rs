@@ -21,7 +21,7 @@ impl MainState {
     pub fn new(_ctx: &mut Context) -> MainState {
         let mut pixel_handler = PixelHandler::new(CELL_SIZE);
 
-        let pixel = Pixel::new(GridPosition::new(0, 0, CELL_SIZE), Color::BLUE);
+        let pixel = Pixel::new(GridPosition::new(10, 10, CELL_SIZE), Color::BLUE);
         pixel_handler.register_pixel(pixel);
 
         MainState { pixel_handler }
@@ -35,20 +35,22 @@ impl EventHandler for MainState {
 
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
         let mut canvas = Canvas::from_frame(ctx, Color::WHITE);
+        let pixel_handler = &mut self.pixel_handler;
 
-        self.pixel_handler.draw_grid(ctx, Color::BLACK);
-        self.pixel_handler.display_fps(ctx);
+        pixel_handler.draw_grid(ctx, Color::BLACK);
+        pixel_handler.display_fps(ctx);
 
-        for (_position, pixel) in self.pixel_handler.pixels.iter_mut() {
-            pixel.position += GridPosition::new(1, 1, CELL_SIZE);
+        for (_position, pixel) in pixel_handler.pixels.iter_mut() {
+            let next_position = pixel.position + GridPosition::new(0, 1, CELL_SIZE);
 
-            if pixel.position.is_offscreen(ctx) {
-                println!("Pixel is offscreen");
-                pixel.position = GridPosition::new(0, 0, CELL_SIZE);
+            if next_position.is_offscreen(ctx) {
+                continue;
+            } else {
+                pixel.position = next_position;
             }
         }
 
-        self.pixel_handler.update(&mut canvas, ctx);
+        pixel_handler.update(&mut canvas, ctx);
         canvas.finish(ctx)
     }
 }

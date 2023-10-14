@@ -31,11 +31,12 @@ impl EventHandler for MainState {
 
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
         let mut canvas = Canvas::from_frame(ctx, Color::WHITE);
+        let pixel_handler = &mut self.pixel_handler;
 
-        self.pixel_handler.draw_grid(ctx, Color::BLACK);
-        self.pixel_handler.display_fps(ctx);
+        pixel_handler.draw_grid(ctx, Color::BLACK);
+        pixel_handler.display_fps(ctx);
 
-        self.pixel_handler.update(&mut canvas, ctx);
+        pixel_handler.update(&mut canvas, ctx);
         canvas.finish(ctx)
     }
 

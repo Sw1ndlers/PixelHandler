@@ -19,3 +19,8 @@ path = "src/lib.rs"
 [[bin]]
 name = "simple_render"
 path = "examples/simple_render.rs"
+
+[[bin]]
+name = "pixel_offscreen"
+path = "examples/pixel_offscreen.rs"
+
