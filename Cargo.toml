@@ -1,0 +1,17 @@
+[package]
+name = "pixel_handler"
+version = "1.0.0"
+authors = ["sw1ndler <@425797455486124032>"]
+edition = "2021"
+readme = "README.md"
+description = "Wrapper for the ggez game engine crate"
+repository = "https://github.com/Sw1ndlerScripts/PixelHandler"
+license = "MIT"
+keywords = ["ggez", "pixel"]
+
+[dependencies]
+ggez = "0.9.3"
+
+[lib]
+name = "pixel_handler"
+path = "src/lib.rs"
