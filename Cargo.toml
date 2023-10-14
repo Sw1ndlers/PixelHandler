@@ -1,6 +1,6 @@
 [package]
 name = "pixel-handler"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["sw1ndler <@425797455486124032>"]
 edition = "2021"
 readme = "README.md"
