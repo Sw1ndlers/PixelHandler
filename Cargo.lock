@@ -3,6 +3,13 @@
 version = 3
 
 [[package]]
+name = "PixelHandler"
+version = "1.0.0"
+dependencies = [
+ "ggez",
+]
+
+[[package]]
 name = "ab_glyph"
 version = "0.2.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1747,13 +1754,6 @@ name = "percent-encoding"
 version = "2.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9b2a4787296e9989611394c33f193f676704af1686e70b8f8033ab5ba9a35a94"
-
-[[package]]
-name = "pixel_handler"
-version = "1.0.0"
-dependencies = [
- "ggez",
-]
 
 [[package]]
 name = "pkg-config"
