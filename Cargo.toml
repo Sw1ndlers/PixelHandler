@@ -1,6 +1,6 @@
 [package]
 name = "PixelHandler"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["sw1ndler <@425797455486124032>"]
 edition = "2021"
 readme = "README.md"
