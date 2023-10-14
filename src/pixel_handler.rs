@@ -107,6 +107,15 @@ impl PixelHandler {
         self.pixels.get(&position)
     }
 
+    pub fn position_offscreen(&self, position: GridPosition, ctx: &mut Context) -> bool {
+        let window_size = ctx.gfx.size();
+
+        position.x < 0
+            || position.x > window_size.0 as i32
+            || position.y < 0
+            || position.y > window_size.1 as i32
+    }
+
     pub fn update(&mut self, canvas: &mut Canvas, ctx: &mut Context) {
         let mut mesh_builder = graphics::MeshBuilder::new();
 

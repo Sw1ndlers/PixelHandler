@@ -1,5 +1,6 @@
 use super::grid_position::GridPosition;
 
+
 use ggez::graphics::{self, Color, MeshBuilder};
 
 #[derive(Clone)]
