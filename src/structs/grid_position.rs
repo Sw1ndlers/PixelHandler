@@ -1,5 +1,4 @@
-use std::{ops::AddAssign, hash::Hasher};
-use std::hash::Hash;
+use std::{ops::{Add, Mul, AddAssign}, hash::{Hasher, Hash}};
 
 use ggez::{glam::Vec2, graphics};
 
@@ -71,3 +70,28 @@ impl AddAssign for GridPosition {
         self.y += other.y;
     }
 }
+
+impl Add for GridPosition {
+    type Output = Self;
+
+    fn add(self, other: Self) -> Self {
+        Self {
+            cell_size: self.cell_size,
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
+    }
+}
+
+impl Mul for GridPosition {
+    type Output = Self;
+
+    fn multiply(self, other: Self) -> Self {
+        Self {
+            cell_size: self.cell_size,
+            x: self.x * other.x,
+            y: self.y * other.y,
+        }
+    }
+}
+
