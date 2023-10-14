@@ -1,5 +1,5 @@
 [package]
-name = "PixelHandler"
+name = "pixel-handler"
 version = "1.0.1"
 authors = ["sw1ndler <@425797455486124032>"]
 edition = "2021"
