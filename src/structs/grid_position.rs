@@ -27,7 +27,6 @@ impl Hash for GridPosition {
     }
 }
 
-
 impl GridPosition {
     pub fn new(x: i32, y: i32, cell_size: (f32, f32)) -> Self {
         let x = x * cell_size.0 as i32;
@@ -38,9 +37,9 @@ impl GridPosition {
 
     pub fn from_vec2(vec: Vec2, cell_size: (f32, f32)) -> Self {
         let x = (vec.x / cell_size.0).floor() as i32;
-        let y = (vec.y / cell_size.0).floor() as i32;
+        let y = (vec.y / cell_size.1).floor() as i32;
     
-        Self { cell_size, x, y }
+        Self::new(x, y, cell_size)
     }
 
     pub fn as_vec2(&self) -> Vec2 {

@@ -1,6 +1,6 @@
 use ggez::{
     conf::WindowMode,
-    event::{self, EventHandler},
+    event::{self, EventHandler, MouseButton},
     glam::*,
     graphics::{Canvas, Color},
     Context, ContextBuilder, GameResult,
@@ -11,7 +11,7 @@ use pixel_handler::{
     structs::{grid_position::GridPosition, pixel::Pixel},
 };
 
-const CELL_SIZE: (f32, f32) = (3.0, 3.0);
+const CELL_SIZE: (f32, f32) = (15.0, 15.0);
 
 struct MainState {
     pixel_handler: PixelHandler,
@@ -19,18 +19,7 @@ struct MainState {
 
 impl MainState {
     pub fn new(_ctx: &mut Context) -> MainState {
-        let mut pixel_handler = PixelHandler::new(CELL_SIZE);
-
-        let window_size = _ctx.gfx.size();
-        let total_pixels = (window_size.0 / CELL_SIZE.0 * window_size.1 / CELL_SIZE.0) as i32;
-
-        println!("Total pixels: {}", total_pixels);
-
-        for i in 0..total_pixels {
-            let pixel = Pixel::new(GridPosition::new(i, i, CELL_SIZE), Color::BLUE);
-            pixel_handler.register_pixel(pixel);
-        }
-
+        let pixel_handler = PixelHandler::new(CELL_SIZE);
         MainState { pixel_handler }
     }
 }
@@ -46,19 +35,31 @@ impl EventHandler for MainState {
         self.pixel_handler.draw_grid(ctx, Color::BLACK);
         self.pixel_handler.display_fps(ctx);
 
-        for (_position, pixel) in self.pixel_handler.pixels.iter_mut() {
-            pixel.position += GridPosition::new(0, -1, CELL_SIZE);
-        }
-
         self.pixel_handler.update(&mut canvas, ctx);
         canvas.finish(ctx)
+    }
+
+    fn mouse_button_down_event(
+        &mut self,
+        _ctx: &mut Context,
+        _button: MouseButton,
+        x: f32,
+        y: f32,
+    ) -> GameResult {
+        let position = GridPosition::from_vec2(Vec2::new(x, y), CELL_SIZE);
+
+        println!("Adding pixel at {:?}", position);
+
+        let pixel = Pixel::new(position, Color::new(0.0, 0.0, 0.0, 1.0));
+        self.pixel_handler.pixels.insert(position, pixel);
+
+        Ok(())
     }
 }
 
 fn main() {
-    // Make a Context.
-    let (mut ctx, event_loop) = ContextBuilder::new("pixel manager", "sw1ndler")
-        .window_setup(ggez::conf::WindowSetup::default().title("real"))
+    let (mut ctx, event_loop) = ContextBuilder::new("Simple Render", "")
+        .window_setup(ggez::conf::WindowSetup::default().title("Pixel Handler"))
         .build()
         .expect("Could not create ggez context");
 

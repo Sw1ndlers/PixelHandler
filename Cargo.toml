@@ -1,6 +1,6 @@
 [package]
 name = "pixel-handler"
-version = "1.0.1"
+version = "0.1.2"
 authors = ["sw1ndler <@425797455486124032>"]
 edition = "2021"
 readme = "README.md"
@@ -15,3 +15,7 @@ ggez = "0.9.3"
 [lib]
 name = "pixel_handler"
 path = "src/lib.rs"
+
+[[bin]]
+name = "simple_render"
+path = "examples/simple_render.rs"

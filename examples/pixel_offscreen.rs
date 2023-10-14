@@ -54,9 +54,8 @@ impl EventHandler for MainState {
 }
 
 fn main() {
-    // Make a Context.
-    let (mut ctx, event_loop) = ContextBuilder::new("pixel manager", "sw1ndler")
-        .window_setup(ggez::conf::WindowSetup::default().title("real"))
+    let (mut ctx, event_loop) = ContextBuilder::new("Simple Render", "")
+        .window_setup(ggez::conf::WindowSetup::default().title("Pixel Handler"))
         .build()
         .expect("Could not create ggez context");
 
