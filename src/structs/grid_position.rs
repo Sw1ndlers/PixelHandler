@@ -3,7 +3,7 @@ use std::hash::Hash;
 
 use ggez::{glam::Vec2, graphics};
 
-#[derive(Copy, Clone)]
+#[derive(Debug, Copy, Clone)]
 pub struct GridPosition {
     pub cell_size: (f32, f32),
     pub x: i32,
@@ -33,6 +33,13 @@ impl GridPosition {
         let x = x * cell_size.0 as i32;
         let y = y * cell_size.1 as i32;
 
+        Self { cell_size, x, y }
+    }
+
+    pub fn from_vec2(vec: Vec2, cell_size: (f32, f32)) -> Self {
+        let x = (vec.x / cell_size.0).floor() as i32;
+        let y = (vec.y / cell_size.0).floor() as i32;
+    
         Self { cell_size, x, y }
     }
 
