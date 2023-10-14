@@ -60,8 +60,8 @@ impl GridPosition {
 
         self.x < 0
             || self.y < 0 
-            || self.x > window_size.0 as i32 - (self.cell_size.0 as i32 * 2)  
-            || self.y > window_size.1 as i32 - (self.cell_size.1 as i32 * 3) 
+            || self.x > window_size.0 as i32
+            || self.y > window_size.1 as i32
     }
 }
 
