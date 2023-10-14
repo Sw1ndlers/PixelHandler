@@ -86,7 +86,7 @@ impl Add for GridPosition {
 impl Mul for GridPosition {
     type Output = Self;
 
-    fn multiply(self, other: Self) -> Self {
+    fn mul(self, other: Self) -> Self {
         Self {
             cell_size: self.cell_size,
             x: self.x * other.x,
