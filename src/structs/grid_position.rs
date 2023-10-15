@@ -70,8 +70,8 @@ impl GridPosition {
 
         let top = 0.0;
         let left = 0.0;
-        let bottom = window_size.1;
-        let right = window_size.0;
+        let bottom = window_size.1 - self.cell_size.1;
+        let right = window_size.0 - self.cell_size.0;
 
         let position = self.as_vec2();
 
