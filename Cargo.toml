@@ -1,6 +1,6 @@
 [package]
 name = "pixel-handler"
-version = "0.1.4"
+version = "0.1.5"
 authors = ["sw1ndler <@425797455486124032>"]
 edition = "2021"
 readme = "README.md"
@@ -23,4 +23,3 @@ path = "examples/simple_render.rs"
 [[bin]]
 name = "pixel_offscreen"
 path = "examples/pixel_offscreen.rs"
-

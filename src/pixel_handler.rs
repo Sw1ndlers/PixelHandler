@@ -44,21 +44,27 @@ impl PixelHandler {
 
         let mut mesh_builder = graphics::MeshBuilder::new();
 
-        let x_lines = (window_size.1 / cell_size.0) as i32; // get amount of lines to fit vertically (y axis)
-        let y_lines = (window_size.0 / cell_size.1) as i32; // get amount of lines to fit horizontally (x axis)
+        let horizontal_lines = (window_size.1 / cell_size.1) as i32; 
+        let vertical_lines = (window_size.0 / cell_size.0) as i32; 
 
-        for x in 0..x_lines {
-            let left_point = Vec2::new(0.0, x as f32 * cell_size.0);
-            let right_point = Vec2::new(window_size.0, x as f32 * cell_size.0);
+        // creating lines from left to right 
+        for y in 0..horizontal_lines {
+            let y_column = y as f32 * cell_size.1;
+
+            let left_point = Vec2::new(0.0, y_column);
+            let right_point = Vec2::new(window_size.0, y_column);
 
             mesh_builder
                 .line(&[left_point, right_point], 1.0, grid_color)
                 .unwrap();
         }
 
-        for y in 0..y_lines {
-            let top_point = Vec2::new(y as f32 * cell_size.1, 0.0);
-            let bottom_point = Vec2::new(y as f32 * cell_size.1, window_size.1);
+        // creating lines from top to bottom
+        for x in 0..vertical_lines {
+            let x_row = x as f32 * cell_size.0;
+
+            let top_point = Vec2::new(x_row, 0.0);
+            let bottom_point = Vec2::new(x_row, window_size.1);
 
             mesh_builder
                 .line(&[top_point, bottom_point], 1.0, grid_color)
@@ -105,15 +111,6 @@ impl PixelHandler {
 
     pub fn get_pixel(&self, position: GridPosition) -> Option<&Pixel> {
         self.pixels.get(&position)
-    }
-
-    pub fn position_offscreen(&self, position: GridPosition, ctx: &mut Context) -> bool {
-        let window_size = ctx.gfx.size();
-
-        position.x < 0
-            || position.x > window_size.0 as i32
-            || position.y < 0
-            || position.y > window_size.1 as i32
     }
 
     pub fn update(&mut self, canvas: &mut Canvas, ctx: &mut Context) {

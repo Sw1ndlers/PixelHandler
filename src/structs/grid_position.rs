@@ -1,4 +1,7 @@
-use std::{ops::{Add, Mul, AddAssign}, hash::{Hasher, Hash}};
+use std::{
+    hash::{Hash, Hasher},
+    ops::{Add, AddAssign, Mul},
+};
 
 use ggez::{glam::Vec2, graphics};
 
@@ -34,10 +37,18 @@ impl GridPosition {
         Self { cell_size, x, y }
     }
 
+    fn round_down(&self, value: f32, multiple: f32) -> f32 {
+        (value / multiple).floor() * multiple
+    }
+
+    fn round_up(&self, value: f32, multiple: f32) -> f32 {
+        (value / multiple).ceil() * multiple
+    }
+
     pub fn from_vec2(vec: Vec2, cell_size: (f32, f32)) -> Self {
         let x = (vec.x / cell_size.0).floor() as i32;
         let y = (vec.y / cell_size.1).floor() as i32;
-    
+
         Self::new(x, y, cell_size)
     }
 
@@ -54,14 +65,20 @@ impl GridPosition {
         )
     }
 
-    // Broken
     pub fn is_offscreen(&self, ctx: &mut ggez::Context) -> bool {
-        let window_size = ctx.gfx.size();
+        let window_size = ctx.gfx.drawable_size();
 
-        self.x < 0
-            || self.y < 0 
-            || self.x > window_size.0 as i32
-            || self.y > window_size.1 as i32
+        let top = 0.0;
+        let left = 0.0;
+        let bottom = window_size.1;
+        let right = window_size.0;
+
+        let position = self.as_vec2();
+
+        return position.x < left 
+            || position.x > right 
+            || position.y < top 
+            || position.y > bottom
     }
 }
 
@@ -95,4 +112,3 @@ impl Mul for GridPosition {
         }
     }
 }
-

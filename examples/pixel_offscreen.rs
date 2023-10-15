@@ -66,7 +66,7 @@ fn main() {
     ctx.gfx
         .set_mode(WindowMode {
             resizable: true,
-            min_height: 280.0,
+            min_height: 350.0,
             min_width: 350.0,
 
             ..Default::default()
