@@ -105,11 +105,11 @@ impl PixelHandler {
         self.pixels.insert(pixel.position, pixel);
     }
 
-    pub fn position_occupied(&self, position: GridPosition) -> bool {
-        self.pixels.contains_key(&position)
+    pub fn position_occupied(&self, position: &GridPosition) -> bool {
+        self.pixels.contains_key(position)
     }
 
-    pub fn get_pixel(&self, position: GridPosition) -> Option<&Pixel> {
+    pub fn get_pixel(&self, position: &GridPosition) -> Option<&Pixel> {
         self.pixels.get(&position)
     }
 
