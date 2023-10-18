@@ -3,7 +3,7 @@ use super::grid_position::GridPosition;
 
 use ggez::graphics::{self, Color, MeshBuilder};
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub struct Pixel {
     pub position: GridPosition,
     pub color: Color,
